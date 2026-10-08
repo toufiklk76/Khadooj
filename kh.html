@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خديجة | معرض الأعمال والأبحاث البيولوجية</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Cairo & Tajawal -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        bio: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                            emerald: '#059669',
+                            darkBg: '#0b1320',
+                            darkCard: '#132035'
+                        }
+                    },
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                        tajawal: ['Tajawal', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        /* Custom Glowing & Particle Effects */
+        .bio-glow {
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.25);
+        }
+        .bio-glow-hover:hover {
+            box-shadow: 0 0 30px rgba(34, 197, 94, 0.4);
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: #0b1320;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #22c55e;
+            border-radius: 4px;
+        }
+        
+        /* Modal Transition */
+        .modal-fade {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-emerald-50/40 text-slate-800 dark:bg-bio-darkBg dark:text-slate-100 min-h-screen flex flex-col justify-between selection:bg-emerald-500 selection:text-white">
+
+    <header class="sticky top-0 z-40 backdrop-blur-md bg-white/80 dark:bg-bio-darkBg/80 border-b border-emerald-100 dark:border-emerald-900/40 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-emerald-600 to-green-400 flex items-center justify-center text-white shadow-lg shadow-emerald-500/20 group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-dna text-xl animate-pulse"></i>
+                </div>
+                <div>
+                    <span class="text-2xl font-black bg-gradient-to-r from-emerald-700 via-green-600 to-teal-500 dark:from-emerald-400 dark:to-teal-300 bg-clip-text text-transparent">خديجة</span>
+                    <span class="block text-xs font-tajawal text-slate-500 dark:text-slate-400 -mt-1">باحثة ومتخصصة بيولوجيا</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-700 dark:text-slate-200">
+                <a href="#about" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">عن خديجة</a>
+                <a href="#skills" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">المهارات والخبرات</a>
+                <a href="#projects" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">المشاريع والأبحاث</a>
+                <a href="#timeline" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">المسيرة الأكاديمية</a>
+                <a href="#contact" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">تواصل معي</a>
+            </nav>
+
+            <!-- Actions & Theme Toggle -->
+            <div class="flex items-center gap-4">
+                <button id="themeToggleBtn" aria-label="تبديل الوضع المظلم" class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-amber-400 hover:bg-emerald-100 dark:hover:bg-slate-700 flex items-center justify-center transition-all">
+                    <i id="themeIcon" class="fa-solid fa-moon text-lg"></i>
+                </button>
+
+                <a href="#contact" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm shadow-md shadow-emerald-600/30 transition-all hover:scale-105">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    <span>تواصل مباشر</span>
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" aria-label="قائمة التصفح" class="md:hidden w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 flex items-center justify-center">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white dark:bg-bio-darkCard border-b border-slate-200 dark:border-slate-800 px-4 pt-2 pb-6 space-y-3 font-medium">
+            <a href="#about" class="block py-2 text-slate-700 dark:text-slate-200 hover:text-emerald-600">عن خديجة</a>
+            <a href="#skills" class="block py-2 text-slate-700 dark:text-slate-200 hover:text-emerald-600">المهارات والخبرات</a>
+            <a href="#projects" class="block py-2 text-slate-700 dark:text-slate-200 hover:text-emerald-600">المشاريع والأبحاث</a>
+            <a href="#timeline" class="block py-2 text-slate-700 dark:text-slate-200 hover:text-emerald-600">المسيرة الأكاديمية</a>
+            <a href="#contact" class="block py-2 text-slate-700 dark:text-slate-200 hover:text-emerald-600">تواصل معي</a>
+        </div>
+    </header>
+
+    <section class="relative overflow-hidden py-16 lg:py-24">
+        <!-- Decorative Biology Shapes -->
+        <div class="absolute -top-12 left-10 w-72 h-72 bg-emerald-300/20 dark:bg-emerald-600/10 rounded-full blur-3xl -z-10 pointer-events-none"></div>
+        <div class="absolute bottom-0 right-10 w-96 h-96 bg-teal-300/20 dark:bg-teal-600/10 rounded-full blur-3xl -z-10 pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-7 space-y-6 text-center lg:text-right">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-100 dark:bg-emerald-950/60 border border-emerald-300 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-sm font-semibold">
+                    <i class="fa-solid fa-microscope"></i>
+                    <span>متخصصة في البيولوجيا والعلوم الحيوية</span>
+                </div>
+
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight tracking-tight">
+                    استكشاف أسرار <span class="bg-gradient-to-r from-emerald-600 to-teal-500 dark:from-emerald-400 dark:to-teal-300 bg-clip-text text-transparent">الحياة</span> والعلوم البيولوجية
+                </h1>
+
+                <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl font-tajawal">
+                    مرحباً بكم! أنا <strong class="text-emerald-700 dark:text-emerald-400 font-bold">خديجة</strong>، طموحة وباحثة شغوفة بدراسة الكائنات الحية، البيولوجيا الجزيئية، وعلم الأحياء الدقيقة. أطمح للمساهمة في الاكتشافات العلمية وتطوير الحلول الحيوية والطبية الحديثة.
+                </p>
+
+                <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-4">
+                    <a href="#projects" class="px-8 py-3.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold text-base shadow-lg shadow-emerald-600/25 transition-all hover:scale-105 flex items-center gap-2">
+                        <i class="fa-solid fa-flask"></i>
+                        <span>استعرض الأبحاث والمشاريع</span>
+                    </a>
+                    <a href="#contact" class="px-8 py-3.5 rounded-xl border-2 border-emerald-600 dark:border-emerald-500 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 font-bold text-base transition-all">
+                        <span>طلب تعاون بحثي</span>
+                    </a>
+                </div>
+
+                <!-- Fast Stats -->
+                <div class="grid grid-cols-3 gap-4 pt-8 border-t border-slate-200 dark:border-slate-800 max-w-lg mx-auto lg:mx-0">
+                    <div class="text-center lg:text-right">
+                        <span class="block text-2xl font-black text-emerald-600 dark:text-emerald-400">+10</span>
+                        <span class="text-xs text-slate-500 dark:text-slate-400 font-tajawal">تجارب وأبحاث مخبرية</span>
+                    </div>
+                    <div class="text-center lg:text-right">
+                        <span class="block text-2xl font-black text-emerald-600 dark:text-emerald-400">+5</span>
+                        <span class="text-xs text-slate-500 dark:text-slate-400 font-tajawal">أوراق ودراسات علمية</span>
+                    </div>
+                    <div class="text-center lg:text-right">
+                        <span class="block text-2xl font-black text-emerald-600 dark:text-emerald-400">100%</span>
+                        <span class="text-xs text-slate-500 dark:text-slate-400 font-tajawal">شغف ودقة علمية</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Visual Canvas / Animated Card -->
+            <div class="lg:col-span-5 flex justify-center">
+                <div class="relative w-full max-w-md bg-gradient-to-b from-white to-emerald-50 dark:from-bio-darkCard dark:to-slate-900 border border-emerald-200 dark:border-emerald-800/60 rounded-3xl p-6 shadow-2xl bio-glow">
+                    <!-- Decorative Bio Grid -->
+                    <div class="relative rounded-2xl overflow-hidden bg-slate-900 h-80 flex items-center justify-center p-6 text-white text-center">
+                        <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#22c55e_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                        
+                        <!-- Floating Interactive DNA Graphic -->
+                        <div class="relative z-10 flex flex-col items-center gap-4">
+                            <div class="w-24 h-24 rounded-full bg-emerald-500/20 border-2 border-emerald-400 flex items-center justify-center text-emerald-400 text-5xl animate-bounce">
+                                <i class="fa-solid fa-leaf"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-emerald-300">أبحاث التنوع البيولوجي</h3>
+                            <p class="text-xs text-slate-300 font-tajawal">دراسة الميكروبات، الجينات والأنظمة البيئية بدقة عالية</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+                        <span class="flex items-center gap-1.5"><i class="fa-solid fa-circle text-emerald-500 text-[10px]"></i> المختبر الجزيئي النشط</span>
+                        <span class="font-mono">Bio-Tech 2026</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-16 bg-white dark:bg-bio-darkCard/50 border-y border-slate-100 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white">عن <span class="text-emerald-600 dark:text-emerald-400">خديجة</span></h2>
+                <div class="w-16 h-1 bg-emerald-500 mx-auto mt-2 rounded-full"></div>
+                <p class="mt-4 text-slate-600 dark:text-slate-300 font-tajawal text-lg">باحثة في الأحياء تسعى لربط النظرية العلمية بالتطبيقات العملية في معالجة التحديات البيئية والصحية.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="p-6 rounded-2xl bg-emerald-50/50 dark:bg-slate-800/60 border border-emerald-100 dark:border-emerald-800/40 hover:border-emerald-400 transition-all hover:-translate-y-1">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-600 text-white flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">الخلفية الأكاديمية</h3>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm font-tajawal leading-relaxed">
+                        طالبة ومتخصصة في علوم الأحياء والبيولوجيا، مع التركيز على التقنيات الحيوية الحديثة، علم الجينات والتخصصات المخبرية الدقيقة.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="p-6 rounded-2xl bg-emerald-50/50 dark:bg-slate-800/60 border border-emerald-100 dark:border-emerald-800/40 hover:border-emerald-400 transition-all hover:-translate-y-1">
+                    <div class="w-12 h-12 rounded-xl bg-teal-600 text-white flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-vial-circle-check"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">الشغف والمجال العلمي</h3>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm font-tajawal leading-relaxed">
+                        اهتمام واسع بدارسة الميكروبيولوجيا والبيولوجيا الجزيئية وتحليل العينات النسيجية، وفهم آليات الاستجابة الحيوية للتغيرات البيئية.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="p-6 rounded-2xl bg-emerald-50/50 dark:bg-slate-800/60 border border-emerald-100 dark:border-emerald-800/40 hover:border-emerald-400 transition-all hover:-translate-y-1">
+                    <div class="w-12 h-12 rounded-xl bg-green-600 text-white flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">الرؤية المستقبلية</h3>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm font-tajawal leading-relaxed">
+                        العمل على أبحاث مبتكرة في مجال الطب الحيوي والاستدامة البيئية، وتوظيف تحليل البيانات الحيوية لاكتشاف حلول مستدامة.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-3xl sm:text-4xl font-black">المهارات <span class="text-emerald-600 dark:text-emerald-400">المخبرية والأكاديمية</span></h2>
+                <div class="w-16 h-1 bg-emerald-500 mx-auto mt-2 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Skill Category 1 -->
+                <div class="bg-white dark:bg-bio-darkCard p-6 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm">
+                    <h3 class="text-lg font-bold mb-6 flex items-center gap-2 text-emerald-700 dark:text-emerald-400">
+                        <i class="fa-solid fa-microscope"></i>
+                        <span>التقنيات المخبرية والتحليلية</span>
+                    </h3>
+
+                    <div class="space-y-4 font-tajawal">
+                        <div>
+                            <div class="flex justify-between text-sm mb-1 font-semibold">
+                                <span>التحليل المجهري (Microscopy)</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="w-full h-2.5 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-emerald-500 rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-sm mb-1 font-semibold">
+                                <span>استخلاص وتحليل الحمض النووي (DNA/RNA Isolation)</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="w-full h-2.5 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-emerald-500 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-sm mb-1 font-semibold">
+                                <span>تقنيات زراعة الخلايا والبكتيريا (Microbial Culturing)</span>
+                                <span>88%</span>
+                            </div>
+                            <div class="w-full h-2.5 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-emerald-500 rounded-full" style="width: 88%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill Category 2 -->
+                <div class="bg-white dark:bg-bio-darkCard p-6 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm">
+                    <h3 class="text-lg font-bold mb-6 flex items-center gap-2 text-emerald-700 dark:text-emerald-400">
+                        <i class="fa-solid fa-laptop-code"></i>
+                        <span>البرامج وتحليل البيانات الحيوية</span>
+                    </h3>
+
+                    <div class="space-y-4 font-tajawal">
+                        <div>
+                            <div class="flex justify-between text-sm mb-1 font-semibold">
+                                <span>تحليل البيانات الإحصائية الحيوية (Bio-Statistics)</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="w-full h-2.5 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-teal-500 rounded-full" style="width: 80%"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-sm mb-1 font-semibold">
+                                <span>برامج الملاحظة المجهرية والنمذجة (ImageJ / GraphPad)</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="w-full h-2.5 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-teal-500 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-sm mb-1 font-semibold">
+                                <span>كتابة التقارير والأبحاث الأكاديمية</span>
+                                <span>92%</span>
+                            </div>
+                            <div class="w-full h-2.5 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-teal-500 rounded-full" style="width: 92%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-16 bg-emerald-50/50 dark:bg-bio-darkCard/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <h2 class="text-3xl sm:text-4xl font-black">المشاريع <span class="text-emerald-600 dark:text-emerald-400">والدراسات البحثية</span></h2>
+                <div class="w-16 h-1 bg-emerald-500 mx-auto mt-2 rounded-full"></div>
+                <p class="mt-4 text-slate-600 dark:text-slate-300 font-tajawal">استعراض لأبرز الأبحاث والتجارب العملية التي قامت بها خديجة</p>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-3 mb-10">
+                <button class="filter-btn active px-5 py-2 rounded-xl text-sm font-semibold bg-emerald-600 text-white shadow-md transition-all" data-filter="all">الكل</button>
+                <button class="filter-btn px-5 py-2 rounded-xl text-sm font-semibold bg-white dark:bg-bio-darkCard text-slate-700 dark:text-slate-300 hover:bg-emerald-100 transition-all" data-filter="molecular">بيولوجيا جزيئية</button>
+                <button class="filter-btn px-5 py-2 rounded-xl text-sm font-semibold bg-white dark:bg-bio-darkCard text-slate-700 dark:text-slate-300 hover:bg-emerald-100 transition-all" data-filter="microbiology">ميكروبيولوجيا</button>
+                <button class="filter-btn px-5 py-2 rounded-xl text-sm font-semibold bg-white dark:bg-bio-darkCard text-slate-700 dark:text-slate-300 hover:bg-emerald-100 transition-all" data-filter="ecology">علم البيئة والتنوع</button>
+            </div>
+
+            <!-- Projects Grid -->
+            <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Project Card 1 -->
+                <div class="project-card bg-white dark:bg-bio-darkCard rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-xl transition-all" data-category="molecular">
+                    <div class="relative h-48 bg-slate-800 flex items-center justify-center text-emerald-400">
+                        <i class="fa-solid fa-dna text-6xl opacity-80"></i>
+                        <span class="absolute top-4 right-4 bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full">بيولوجيا جزيئية</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">دراسة الطفرات الجينية في السلالات البكتيرية</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm font-tajawal line-clamp-2 mb-4">
+                            بحث يتناول تحليل المتغيرات الجينية وتأثيرها على مقاومة المضادات الحيوية باستخدام تقنيات PCR.
+                        </p>
+                        <button onclick="openProjectModal('دراسة الطفرات الجينية', 'بحث شامل يتناول تحليل العينات البكتيرية المعزولة مخبرياً، ودراسة نمط مقاومتها للمضادات الحيوية مع ربط ذلك بالتغيرات الجينية المقاسة عبر تقنية PCR والتسلسل الجيني.', 'بيولوجيا جزيئية', '2025')" class="w-full py-2.5 rounded-xl border border-emerald-500 text-emerald-600 dark:text-emerald-400 font-semibold text-sm hover:bg-emerald-50 dark:hover:bg-emerald-950/50 transition-colors">
+                            عرض تفاصيل البحث
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project Card 2 -->
+                <div class="project-card bg-white dark:bg-bio-darkCard rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-xl transition-all" data-category="microbiology">
+                    <div class="relative h-48 bg-slate-800 flex items-center justify-center text-teal-400">
+                        <i class="fa-solid fa-bacteria text-6xl opacity-80"></i>
+                        <span class="absolute top-4 right-4 bg-teal-600 text-white text-xs font-bold px-3 py-1 rounded-full">ميكروبيولوجيا</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">تأثير المستخلصات النباتية على البكتيريا المرضية</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm font-tajawal line-clamp-2 mb-4">
+                            تقييم النشاط المضاد للميكروبات لبعض المستخلصات النباتية الطبيعية كبدائل علاجية واعدة.
+                        </p>
+                        <button onclick="openProjectModal('تأثير المستخلصات النباتية', 'دراسة تجريبية تم فيها استخلاص الزيوت والمحافيز النباتية واختبار فعاليتها الضد-بكتيرية في أطباق التثبيط المخبرية ضد عدة سلالات مرضوية.', 'ميكروبيولوجيا', '2025')" class="w-full py-2.5 rounded-xl border border-teal-500 text-teal-600 dark:text-teal-400 font-semibold text-sm hover:bg-teal-50 dark:hover:bg-teal-950/50 transition-colors">
+                            عرض تفاصيل البحث
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project Card 3 -->
+                <div class="project-card bg-white dark:bg-bio-darkCard rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-xl transition-all" data-category="ecology">
+                    <div class="relative h-48 bg-slate-800 flex items-center justify-center text-green-400">
+                        <i class="fa-solid fa-tree text-6xl opacity-80"></i>
+                        <span class="absolute top-4 right-4 bg-green-600 text-white text-xs font-bold px-3 py-1 rounded-full">علم البيئة</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">مسح التنوع البيولوجي في البيئات المائية</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm font-tajawal line-clamp-2 mb-4">
+                            دراسة ميدانية لتحليل كائنات الميكرو-أورغانيزم وتأثير التلوث البيئي على التوازن الحيوي المائي.
+                        </p>
+                        <button onclick="openProjectModal('مسح التنوع البيولوجي المائي', 'مشروع ميداني تضمن جمع عينات مائية من مصادر مختلفة، وتحديد المؤشرات الحيوية وجودة المياه عبر قياس الكائنات الدقيقة المتواجدة بها.', 'علم البيئة والتنوع', '2024')" class="w-full py-2.5 rounded-xl border border-green-500 text-green-600 dark:text-green-400 font-semibold text-sm hover:bg-green-50 dark:hover:bg-green-950/50 transition-colors">
+                            عرض تفاصيل البحث
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="timeline" class="py-16">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-3xl sm:text-4xl font-black">المسيرة <span class="text-emerald-600 dark:text-emerald-400">الأكاديمية والتدريبية</span></h2>
+                <div class="w-16 h-1 bg-emerald-500 mx-auto mt-2 rounded-full"></div>
+            </div>
+
+            <div class="relative border-r-2 border-emerald-300 dark:border-emerald-800 mr-4 md:mr-8 space-y-8">
+                <!-- Item 1 -->
+                <div class="relative pr-8">
+                    <div class="absolute -right-[9px] top-1.5 w-4 h-4 rounded-full bg-emerald-600 border-4 border-white dark:border-bio-darkBg"></div>
+                    <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-100 dark:bg-emerald-950/80 px-3 py-1 rounded-full">2024 - الحالي</span>
+                    <h3 class="text-xl font-bold mt-2">دراسات متقدمة في علوم الأحياء / البيولوجيا</h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm font-tajawal mt-1">التركيز على البيولوجيا الجزيئية والدراسات المخبرية المتقدمة.</p>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="relative pr-8">
+                    <div class="absolute -right-[9px] top-1.5 w-4 h-4 rounded-full bg-emerald-600 border-4 border-white dark:border-bio-darkBg"></div>
+                    <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-100 dark:bg-emerald-950/80 px-3 py-1 rounded-full">2024</span>
+                    <h3 class="text-xl font-bold mt-2">تدريب مخبري في التحاليل الطبية والميكروبيولوجيا</h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm font-tajawal mt-1">تطبيق عملي لمواصفات السلامة البيولوجية وإجراء الفحوصات المجهرية والدقيقة.</p>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="relative pr-8">
+                    <div class="absolute -right-[9px] top-1.5 w-4 h-4 rounded-full bg-emerald-600 border-4 border-white dark:border-bio-darkBg"></div>
+                    <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-100 dark:bg-emerald-950/80 px-3 py-1 rounded-full">2023</span>
+                    <h3 class="text-xl font-bold mt-2">مشاركات في ملتقيات وبحوث التنوع البيئي</h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm font-tajawal mt-1">تقديم ورش عمل وأوراق بحثية حول الاستدامة والحفاظ على التنوع الحيوي.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-16 bg-white dark:bg-bio-darkCard/50 border-t border-slate-100 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                
+                <!-- Contact Info -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div>
+                        <h2 class="text-3xl font-black">تواصل مع <span class="text-emerald-600 dark:text-emerald-400">خديجة</span></h2>
+                        <p class="text-slate-600 dark:text-slate-300 font-tajawal mt-2">هل لديك استفسار أكاديمي، اقتراح لتعاون بحثي، أو رغبة في التواصل؟ يمكنك إرسال رسالة مباشرة.</p>
+                    </div>
+
+                    <div class="space-y-4 font-tajawal">
+                        <div class="flex items-center gap-4 p-4 rounded-xl bg-emerald-50/60 dark:bg-slate-800/60">
+                            <div class="w-10 h-10 rounded-lg bg-emerald-600 text-white flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <span class="block text-xs text-slate-500 dark:text-slate-400">البريد الإلكتروني</span>
+                                <span class="font-bold text-slate-800 dark:text-slate-200">khadija.bio@example.com</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4 p-4 rounded-xl bg-emerald-50/60 dark:bg-slate-800/60">
+                            <div class="w-10 h-10 rounded-lg bg-emerald-600 text-white flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-graduation-cap"></i>
+                            </div>
+                            <div>
+                                <span class="block text-xs text-slate-500 dark:text-slate-400">الملف الأكاديمي</span>
+                                <span class="font-bold text-slate-800 dark:text-slate-200">ResearchGate / LinkedIn</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Links -->
+                    <div class="flex gap-3 pt-2">
+                        <a href="#" aria-label="LinkedIn" class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white flex items-center justify-center transition-colors">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" aria-label="ResearchGate" class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white flex items-center justify-center transition-colors">
+                            <i class="fa-brands fa-researchgate"></i>
+                        </a>
+                        <a href="#" aria-label="Twitter" class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white flex items-center justify-center transition-colors">
+                            <i class="fa-brands fa-x-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="lg:col-span-7 bg-emerald-50/30 dark:bg-slate-800/40 p-8 rounded-3xl border border-emerald-100 dark:border-slate-800">
+                    <form id="contactForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold mb-2">الاسم الكامل</label>
+                                <input type="text" required placeholder="أدخل اسمك" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-bio-darkBg focus:ring-2 focus:ring-emerald-500 outline-none transition-all">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold mb-2">البريد الإلكتروني</label>
+                                <input type="email" required placeholder="example@domain.com" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-bio-darkBg focus:ring-2 focus:ring-emerald-500 outline-none transition-all">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold mb-2">موضوع الرسالة</label>
+                            <input type="text" required placeholder="مثال: استفسار حول بحث الميكروبيولوجيا" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-bio-darkBg focus:ring-2 focus:ring-emerald-500 outline-none transition-all">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold mb-2">نص الرسالة</label>
+                            <textarea rows="4" required placeholder="اكتب رسالتك هنا..." class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-bio-darkBg focus:ring-2 focus:ring-emerald-500 outline-none transition-all resize-none"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold transition-all shadow-lg shadow-emerald-600/25 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>إرسال الرسالة</span>
+                        </button>
+                    </form>
+
+                    <!-- Success Alert Message -->
+                    <div id="formSuccessMessage" class="hidden mt-4 p-4 rounded-xl bg-emerald-100 dark:bg-emerald-950 border border-emerald-400 text-emerald-800 dark:text-emerald-200 text-center font-tajawal text-sm">
+                        <i class="fa-solid fa-circle-check text-emerald-600 text-lg ml-2"></i>
+                        تم إرسال رسالتك بنجاح! ستتواصل معك خديجة في أقرب وقت.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800 text-sm font-tajawal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-dna text-emerald-400 text-lg"></i>
+                <span class="text-white font-bold">خديجة | Khadija</span>
+                <span>- جميع الحقوق محفوظة &copy; 2026</span>
+            </div>
+            <div class="flex gap-6 text-xs">
+                <a href="#about" class="hover:text-emerald-400 transition-colors">عن خديجة</a>
+                <a href="#projects" class="hover:text-emerald-400 transition-colors">الأبحاث</a>
+                <a href="#contact" class="hover:text-emerald-400 transition-colors">التواصل</a>
+            </div>
+        </div>
+    </footer>
+
+    <div id="projectModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="bg-white dark:bg-bio-darkCard rounded-3xl max-w-lg w-full p-6 shadow-2xl transform scale-95 transition-transform duration-300 relative border border-emerald-100 dark:border-slate-800">
+            <button onclick="closeProjectModal()" class="absolute top-4 left-4 w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-800 dark:hover:text-white flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <span id="modalCategory" class="inline-block text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-100 dark:bg-emerald-950 px-3 py-1 rounded-full mb-3">التصنيف</span>
+            <h3 id="modalTitle" class="text-2xl font-black text-slate-900 dark:text-white mb-2">عنوان المشروع</h3>
+            <p id="modalYear" class="text-xs text-slate-400 mb-4 font-mono">2025</p>
+
+            <p id="modalDescription" class="text-slate-600 dark:text-slate-300 text-sm font-tajawal leading-relaxed mb-6">
+                وصف تفصيلي للبحث أو المشروع...
+            </p>
+
+            <button onclick="closeProjectModal()" class="w-full py-2.5 rounded-xl bg-emerald-600 text-white font-bold text-sm hover:bg-emerald-700 transition-colors">
+                إغلاق
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Theme Toggle (Dark / Light)
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
+        const themeIcon = document.getElementById('themeIcon');
+
+        themeToggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            if (document.documentElement.classList.contains('dark')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Projects Dynamic Filtering
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => {
+                    b.classList.remove('bg-emerald-600', 'text-white', 'shadow-md');
+                    b.classList.add('bg-white', 'dark:bg-bio-darkCard', 'text-slate-700', 'dark:text-slate-300');
+                });
+                btn.classList.add('bg-emerald-600', 'text-white', 'shadow-md');
+                btn.classList.remove('bg-white', 'dark:bg-bio-darkCard', 'text-slate-700', 'dark:text-slate-300');
+
+                const filter = btn.getAttribute('data-filter');
+
+                projectCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Project Modal Handling
+        const modal = document.getElementById('projectModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDescription = document.getElementById('modalDescription');
+        const modalCategory = document.getElementById('modalCategory');
+        const modalYear = document.getElementById('modalYear');
+
+        function openProjectModal(title, description, category, year) {
+            modalTitle.textContent = title;
+            modalDescription.textContent = description;
+            modalCategory.textContent = category;
+            modalYear.textContent = 'سنة الإنجاز: ' + year;
+
+            modal.classList.remove('pointer-events-none', 'opacity-0');
+            modal.classList.add('opacity-100');
+            modal.firstElementChild.classList.remove('scale-95');
+            modal.firstElementChild.classList.add('scale-100');
+        }
+
+        function closeProjectModal() {
+            modal.classList.add('pointer-events-none', 'opacity-0');
+            modal.classList.remove('opacity-100');
+            modal.firstElementChild.classList.remove('scale-100');
+            modal.firstElementChild.classList.add('scale-95');
+        }
+
+        // Contact Form Processing
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const form = document.getElementById('contactForm');
+            const successMsg = document.getElementById('formSuccessMessage');
+
+            form.reset();
+            successMsg.classList.remove('hidden');
+
+            setTimeout(() => {
+                successMsg.classList.add('hidden');
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
